@@ -15,9 +15,10 @@ export const minus = () => {
     type: MINUS
   }
 }
-export const changeName = () => {
+export const changeName = (data) => {
   return {
-    type: NAME
+    type: NAME,
+    data: data
   }
 }
 

@@ -19,14 +19,36 @@ import './index.scss'
   asyncAdd () {
     dispatch(asyncAdd())
   },
-  changeName () {
-    dispatch(changeName())
+  changeName (data) {
+    dispatch(changeName(data))
   }
 }))
 class Index extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      bool: true,
+    }
+  }
 
-    config = {
+  config = {
     navigationBarTitleText: '首页'
+  }
+
+  goToHome = () => {
+    Taro.navigateTo({
+      url: '/pages/home/index',
+    })
+  }
+// 先保存，后调用,解决 setState 异步问题
+  change = () => {
+    this.setState({
+      bool: !this.state.bool
+    },() => {
+      console.log('this', this.state.bool)
+      this.props.changeName(this.state.bool)
+    })
+    
   }
 
   componentWillReceiveProps (nextProps) {
@@ -45,10 +67,11 @@ class Index extends Component {
         <Button className='add_btn' onClick={this.props.add}>+</Button>
         <Button className='dec_btn' onClick={this.props.dec}>-</Button>
         <Button className='dec_btn' onClick={this.props.asyncAdd}>async</Button>
-        <Button className='dec_btn' onClick={this.props.changeName}>changeName</Button>
+        <Button className='dec_btn' onClick={this.change}>changeName</Button>
         <View><Text>{this.props.counter.num}</Text></View>
         <View><Text>{this.props.counter.name}</Text></View>
         <View><Text>Hello, World</Text></View>
+        <Button onClick={this.goToHome}>跳转到home页面</Button>
       </div>
     )
   }

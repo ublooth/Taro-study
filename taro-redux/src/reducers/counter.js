@@ -14,17 +14,24 @@ export default function counter (state = INITIAL_STATE, action) {
         ...state,
         num: state.num + 1
       }
-     case MINUS:
-       return {
-         ...state,
-         num: state.num - 1
+      case MINUS:
+        return {
+          ...state,
+          num: state.num - 1
        }
-     case NAME:
-       return {
-         ...state,
-         name: '罗宾酱'
-       }
-     default:
-       return state
+      case NAME:
+        console.log("action方法传参", action)
+        let str = '';
+        if(action.data) {
+          str = '丽丽酱'
+        } else {
+          str = '罗宾酱'
+        }
+        return {
+          ...state,
+          name: str
+        }
+    default:
+      return state
   }
 }
