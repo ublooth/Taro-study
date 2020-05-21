@@ -37,7 +37,7 @@ class Index extends Component {
 
   goToHome = () => {
     Taro.navigateTo({
-      url: '/pages/home/index',
+      url: `/pages/home/index?bool=${this.state.bool}&name=${this.props.counter.name}`,
     })
   }
 // 先保存，后调用,解决 setState 异步问题
@@ -52,7 +52,7 @@ class Index extends Component {
   }
 
   componentWillReceiveProps (nextProps) {
-    console.log(this.props, nextProps)
+    // console.log(this.props, nextProps)
   }
 
   componentWillUnmount () { }
@@ -72,6 +72,7 @@ class Index extends Component {
         <View><Text>{this.props.counter.name}</Text></View>
         <View><Text>Hello, World</Text></View>
         <Button onClick={this.goToHome}>跳转到home页面</Button>
+        <Text>{this.state.bool}</Text>
       </div>
     )
   }
